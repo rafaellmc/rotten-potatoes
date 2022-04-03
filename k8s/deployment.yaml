@@ -37,19 +37,19 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: movies
+  name: web
 spec:
   selector:
     matchLabels:
-      app: movies
+      app: web
   template:
     metadata:
       labels:
-        app: movies
+        app: web
     spec:
       containers:
-      - name: movies
-        image: fabricioveronez/rotten-potatoes:v1
+      - name: web
+        image: rafaellmc/rotten-potatoes:v2
         ports:
           - containerPort: 5000
         env:
@@ -67,12 +67,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: movies
+  name: web
 spec:
   selector:
-    app: movies
+    app: web
   ports:
   - port: 80
     targetPort: 5000
-    nodePort: 30000
+    #nodePort: 30000
   type: LoadBalancer
